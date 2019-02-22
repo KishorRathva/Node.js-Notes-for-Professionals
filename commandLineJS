@@ -1,19 +1,22 @@
 #!/usr/bin/env node
-'use strict';
+"use strict";
 //store the first argument as username.
 var username = process.argv[2];
+console.log(process.argv[0]);
+console.log(process.argv[1]);
+// console.log(process.argv[1].split("/"));
+// console.log(require("path"));
+//Check if the username hasn't been provided
 
-//Check if the username hasn't been provided 
+if (!username) {
+  //Extract the filename
+  var appName = process.argv[1].split(require("path").sep).pop();
 
-if(!username){
-    //Extract the filename 
-    var appName = process.argv[1].split(require('path').sep).pop();
+  //Give the user an example on how to use the app.
+  console.error("Missing argument! Example: %s YOUR_NAME", appName);
 
-    //Give the user an example on how to use the app.
-    console.error('Missing argument! Example: %s YOUR_NAME', appName);
-
-    process.exit(1);
+  process.exit(1);
 }
 
 //Print the message to the console.
-console.log('Hello %s!',username);
+console.log("Hello %s!", username);
