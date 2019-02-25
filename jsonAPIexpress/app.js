@@ -22,6 +22,15 @@ app.get('/',(req,res) => {
     // }))
 })
 
+app.get('/x/*',(req,res) => {
+    let data = {
+        fullpath : req.originalUrl ,
+        param :req.params.user_id,
+        query :req.query.field
+    }
+    res.json(data);
+})
+
 app.listen(port ,() => {
     console.log(`Node.js listening on port ${port}`) 
 })
