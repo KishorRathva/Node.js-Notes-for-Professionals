@@ -8,7 +8,6 @@ app.get('/ping',(req,res) => {
     res.send('pong');
 });
 
-app.listen(8080,'localhost');
 
 //Basic routing 
 app.get('/routing',(req,res) => {
@@ -52,5 +51,25 @@ app.route('/chain')
     }
     app.get('/doSomething',myfunction,doSomething.doSomething);
 
+
+ //Error handling in Express 
+
+ //GET /names/kishor 
+ app.get('/names/:name' ,(req,res,next) => {
+     if(req.params.name == 'kishor'){
+         return res.send('Valid Name');
+     }else{
+         next(new Error('Not valid name')); //pass to error handler
+     }
+ });
+
+ //error handler 
+  app.use((err,req,res,next) => {
+      console.log(err.stack); //e.g , Not valid name
+      return res.status(500).send('Internal Server Occurred');
+  })
+
+  
+  app.listen(8080,'localhost');
 
 
